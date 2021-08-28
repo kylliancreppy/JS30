@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Drumkit</title>
+    <meta name="description" content="Page description. No longer than 155 characters.">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="assets/style.css">
+    <h1> Valorant voice pack</h1>
+  </head>
+  <body>
+      
+      <h2>Press a key for the voice</h2>
+  </body>
+</html>
+<div class="keys">
+    <div data-key="65" class="key">
+        <kbd>A</kbd>
+        <span class="sound">Jett</span>
+    </div>
+    <div data-key="90" class="key">
+        <kbd>Z</kbd>
+        <span class="sound">Phoenix</span>
+    </div>
+    <div data-key="69" class="key">
+        <kbd>E</kbd>
+        <span class="sound">Sova</span>
+    </div>
+    <div data-key="82" class="key">
+        <kbd>R</kbd>
+        <span class="sound">Omen</span>
+    </div>
+    <div data-key="84" class="key">
+        <kbd>T</kbd>
+        <span class="sound">Sage</span>
+    </div>
+    <div data-key="89" class="key">
+        <kbd>Y</kbd>
+        <span class="sound">Raze</span>
+    </div>
+</div>
+
+<audio data-key="65" src="assets/audio/jett.wav"></audio>
+<audio data-key="90" src="assets/audio/phoenix1.mp3"></audio>
+<audio data-key="69" src="assets/audio/sova1.mp3"></audio>
+<audio data-key="82" src="assets/audio/omen.mp3"></audio>
+<audio data-key="84" src="assets/audio/sage1.mp3"></audio>
+<audio data-key="89" src="assets/audio/raze1.mp3"></audio>
+
+<script>
+    function playSound(e) {
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+    if(!audio) return;
+    audio.currentTime = 0; 
+    audio.play();
+    key.classList.add('playing');
+}
+
+function removeTransition(e) {
+    if(e.propertyName !== 'transform') return;
+    this.classList.remove('playing');
+}
+
+const keys = document.querySelectorAll('.key');
+keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+window.addEventListener('keydown', playSound);
+</script>
