@@ -1,3 +1,9 @@
+@font-face {
+    font-family: Ballerick ;
+    src: url(Ballerick.otf);
+    font-weight: bold;
+  }
+
 html { 
     box-sizing: border-box;
     background: burlywood;
@@ -8,6 +14,10 @@ html {
 
 body {
     margin: 0;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
 }
 
 .panels {
@@ -31,6 +41,10 @@ body {
     background-size: cover;
     background-position: center;
     flex: 1;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
 
 }
 .panel1 { background-image: url(https://images.unsplash.com/photo-1575448913281-98e9e5d3f193?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80);}
@@ -41,8 +55,37 @@ body {
 
 .panel p {
     text-transform: uppercase;
-    font-family: 'Amatic SC', cursive;
+    font-family: 'Amasic SC', cursive;
     text-shadow: 0 0 4px rgba(0, 0, 0, 0.72), 0 0 14px rgba(0, 0, 0, 0.45);
     font-size: 2rem;
 
+}
+
+.panel p:nth-child(2) {
+    font-size: 4rem;
+}
+
+.panel > * {
+    margin: 0;
+    width: 100%;
+    transition: transform 0.5s;
+    flex: 1 0 auto;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.panel > *:first-child { transform: translateY(-100%);}
+.panel.open-active > *:first-child { transform: translateY(0);}
+.panel > *:last-child { transform: translateY(100%);}
+.panel.open-active > *:last-child { transform: translateY(0);}
+
+.panel.open {
+    font-size: 40px;
+    flex:5;
+}
+
+.cta {
+    text-decoration: none;
+    color: white;
 }
