@@ -1,6 +1,6 @@
 @font-face {
-    font-family: Ballerick ;
-    src: url(Ballerick.otf);
+    font-family: Tangiang ;
+    src: url(Tangiang.otf);
     font-weight: bold;
   }
 
@@ -55,7 +55,7 @@ body {
 
 .panel p {
     text-transform: uppercase;
-    font-family: 'Amasic SC', cursive;
+    font-family: 'Tangiang';
     text-shadow: 0 0 4px rgba(0, 0, 0, 0.72), 0 0 14px rgba(0, 0, 0, 0.45);
     font-size: 2rem;
 
