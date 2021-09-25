@@ -3,19 +3,15 @@
     <head>
         <meta charset="UTF-8">
         <title>Ajax</title>
-        <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="assets/style.css">
     </head>
-    <body>
-        <header>
-        <h3>Where do you want to go ?</h3>
-        <h1 id="site-title">Cities of the world</h1>
-    </header>
-    <main>
-        <input type="search" name="search" value="" class="search-bar">
-            <ul class="results">
+    <form class="search-form">
+        <input type="text" class="search" placeholder="City or State">
+        <ul class="suggestions">
+          <li>Filter for a city</li>
+          <li>or a state</li>
         </ul>
-    </main>
+      </form>
         <script>
             const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
             const cities = []; 
@@ -31,9 +27,33 @@
 
                 });
 
-                function displayMatches () {
-                    console.log(this.value);
-                }
             }
-        </script>
+
+            function numberWithCommas(x) {
+                return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            }
+
+                function displayMatches () {
+                    const matchArray = findMatches(this.value, cities);
+                    const html = matchArray.map(place =>{
+                        const regex = new RegExp(this.value, 'gi');
+                        const cityName = place.city.replace(regex, `<span class="hl">${this.value}</span>`);
+                        const stateName = place.state.replace(regex, `<span class="hl">${this.value}</span>`);
+                        return `
+                        <li>
+                            <span class="name">${place.city}, ${place.state}</span>
+                            <span class="population">${numberWithCommas(place.population)}</span>
+                        </li>
+                        `;
+                    }).join('')
+                    
+                    suggestions.innerHTML = html;
+                    
+                }
+                    const searchInput = document.querySelector('.search');
+                    const suggestions = document.querySelector('.suggestions');
+
+                    searchInput.addEventListener('change', displayMatches);
+                    searchInput.addEventListener('keyup', displayMatches);
+                    </script>
     </body>
